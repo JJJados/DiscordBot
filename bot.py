@@ -1,26 +1,37 @@
 # Work with Python 3.6
 import discord
+from discord.ext import commands
 import localtoken
 
 TOKEN = localtoken.LOCALTOKEN
 
-client = discord.Client()
+bot = commands.Bot(command_prefix='$')
 
-@client.event
-async def on_message(message):
-    # we do not want the bot to reply to itself
-    if message.author == client.user:
-        return
+@bot.command()
+async def greet(ctx):
+    
+    msg = 'Hello {0.author.mention}! :wave:'.format(ctx)
+    await ctx.send(msg)
 
-    if message.content.startswith('!hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
-        await client.send_message(message.channel, msg)
+@bot.command()
+async def math(ctx, a: int, arg, b: int):
 
-@client.event
+    if (arg == '*'):
+        await ctx.send(a * b)
+    elif (arg == '+'):
+        await ctx.send(a + b)
+    elif (arg == '-'):
+        await ctx.send(a - b)
+    elif (arg == '/'):
+        await ctx.send(a // b)
+    else:
+        await ctx.send("Sorry {0.author.mention}, that command isn't something I can do!".format(ctx))
+    
+@bot.event
 async def on_ready():
     print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
+    print(bot.user.name)
+    print(bot.user.id)
     print('------')
 
-client.run(TOKEN)
+bot.run(TOKEN)
