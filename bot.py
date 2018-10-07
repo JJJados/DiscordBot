@@ -11,6 +11,11 @@ bot = commands.Bot(command_prefix='$')
 reddit = praw.Reddit(client_id=localtoken.CLIENTID, client_secret=localtoken.CLIENTSECRET, user_agent=localtoken.USERAGENT)
 
 @bot.command()
+async def commands(ctx):
+    await ctx.send("Current commands:\n\t$greet: Greets the user\n\t$math: Does basic math\n\t$codehumor: Displays memes from r/programmerhumor\n\n\t More to come...")
+
+
+@bot.command()
 async def greet(ctx):
     
     msg = 'Hello {0.author.mention}! :wave:'.format(ctx)
@@ -28,7 +33,7 @@ async def math(ctx, a: int, arg, b: int):
     elif (arg == '/'):
         await ctx.send(a // b)
     else:
-        await ctx.send("Sorry {0.author.mention}, that command is invalid".format(ctx))
+        await ctx.send("Sorry {0.author.mention}, that command is invalid you fuck twit".format(ctx))
 
 @bot.command()
 async def codehumor(ctx):
