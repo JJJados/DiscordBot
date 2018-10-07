@@ -28,7 +28,7 @@ async def math(ctx, a: int, arg, b: int):
     elif (arg == '/'):
         await ctx.send(a // b)
     else:
-        await ctx.send("Sorry {0.author.mention}, that command isn't something I can do!".format(ctx))
+        await ctx.send("Sorry {0.author.mention}, that command is invalid".format(ctx))
 
 @bot.command()
 async def codehumor(ctx):
